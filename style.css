@@ -1,0 +1,17 @@
+.level{
+    border: 1px solid black;
+    width: 200px;
+    text-align: center;
+    background-color: rgb(38, 2, 138);
+}
+a {
+color: white;
+text-decoration: none;
+}
+
+.square {
+    background: red;
+    width: 100px;
+    height: 100px;
+    margin: 50px auto;
+  }
