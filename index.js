@@ -1,6 +1,6 @@
 
 var artist=String['Botticelli', 'Leonardo Da vinci', 'Vicent Van Gogh']; 
-var artistClick= new Array();
+var userChoice= new Array();
 
 function getRandomImage() {  
     //declare an array to store the images  
@@ -15,7 +15,7 @@ function getRandomImage() {
         
     //generate a number and provide to the image to generate randomly  
     let number = Math.floor(Math.random()*paintings.length);  
-    console.log("painting get#: "+ number);
+    console.log("current painting #: "+ number);
     if (number==0){
         
     }  
@@ -23,16 +23,9 @@ function getRandomImage() {
     return "background-image:url('"+paintings[number].src+"')"; 
     //document.body.style.backgroundImage= "url("+paintings[number]+"')";
 }    
-    
-    //document.getElementById("painting").innerHTML = '<img src="'+paintings[number]+'" width="1000px" />';  
-    /*if (paintings[i] == 0){
-        artist[0];
-    }*/
 
-
-
-
-
+createTable();
+createChoices();
 // create and assign images value to array pics   
 var pics=new Array();
 for(i=0;i<=8;i++){
@@ -44,31 +37,31 @@ var user=new Array();
 var temparray=new Array();
 var clickarray=new Array(0,0);
 var ticker, sec, min, ctr, id=0, oktoclick, finished;
-
+let Points=200;
 //set initial
 function init(){
-getRandomImage();    
-createTable();    
 clearTimeout(id);
-for(i=0;i<=15;i++)user[i]=0;
-ticker=0; min=0; sec=0; ctr=0; finished=0;
+for(i=0;i<=15;i++){user[i]=0;}
+//ticker=0; min=0; sec=0; 
+ctr=0; finished=0;
 oktoclick=true;
-document.forms["f"].b.value="Resetting game table...";
+document.forms["f"].b.value="Your score: "+ Points;
 scramble();
-id=setInterval('runclk()', 995);
+//id=setInterval('runclk()', 995);
 for(i=0;i<=15;i++){
 document.images[('img'+i)].src="./assets/images/image0.gif";
 document.images[('img'+i)].alt="";
 }}
+//create Point Count
 
 //create timer
-function runclk(){
+/*function runclk(){
     min=Math.floor(ticker/60);
     sec=(ticker-(min*60))+'';
     if(sec.length==1){sec="0"+sec};
     ticker++;
-    document.forms["f"].b.value="    "+min+":"+sec+"    ";
-}
+    //document.forms["f"].b.value="    "+min+":"+sec+"    ";
+}*/
 //comparision
 function scramble(){
     for(z=0;z<5;z++){
@@ -82,12 +75,19 @@ function scramble(){
 }
 //Flip condition
 function showimage(but){
+    
     if(oktoclick){
-        oktoclick=false; 
+        oktoclick=false;
+        Points= Points - 5;
+        console.log(Points);
+        document.forms["f"].b.value="  Your score: " + Points;
         document.images[('img'+but)].src='./assets/images/image'+map[but]+'.gif';
         document.images[('img'+but)].alt='Image'+map[but];
     if(ctr==0){
         ctr++;
+        Points=Points + 5;
+        document.forms["f"].b.value="  Your score: " + Points;
+        console.log(Points);
         clickarray[0]=but;
         oktoclick=true;
         
@@ -97,7 +97,7 @@ function showimage(but){
         setTimeout('returntoold()', 600);
     }}
 }
-//condition to hold and flip back
+//condition to hold-fade and flip back
 function returntoold(){
     if((clickarray[0]==clickarray[1])&&(!user[clickarray[0]])){
         document.images[('img'+clickarray[0])].src="./assets/images/image0.gif";
@@ -127,21 +127,25 @@ function returntoold(){
         init();
 }   else{
         oktoclick=true;
+
         
 }}}
 
 //create a table of images 4x4
 function createTable(){
+    var t='<table cellpadding="0" cellspacing="0" border="0" style="'+ getRandomImage() +'">';
+    for(r=0;r<=3;r++){
+    t+='<tr>';
+    for(c=0;c<=3;c++)t+='<td align="center"><a href="javascript:showimage('+((4*r)+c)+')" onClick="this.blur()"><img src="./assets/images/image0.gif" name="img'+((4*r)+c)+'" alt="" border="0"></a></td>';
+    t+='</tr>';
+    }
+    t+='</table><br><br><form name="f"><input type="button" value="Downloading images...." name="b" onClick="init()"></form><br/>';
 
-var t='<table cellpadding="0" cellspacing="0" border="0" style="'+ getRandomImage() +'">';
-console.log(t)
-for(r=0;r<=3;r++){
-t+='<tr>';
-for(c=0;c<=3;c++)t+='<td align="center"><a href="javascript:showimage('+((4*r)+c)+')" onClick="this.blur()"><img src="./assets/images/image0.gif" name="img'+((4*r)+c)+'" alt="" border="0"></a></td>';
-t+='</tr>';
+    document.write(t);
+
+    window.onload=init;
 }
-t+='</table><br><br><form name="f"><input type="button" value="Downloading images...." name="b" onClick="init()"></form>';
-document.write(t);
-
-window.onload=init;
+function createChoices(){
+    
+    
 }

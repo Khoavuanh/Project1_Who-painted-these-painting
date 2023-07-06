@@ -9,27 +9,9 @@ color: white;
 text-decoration: none;
 }
 
-.square {
-    background: red;
-    width: 100px;
-    height: 100px;
-    margin: 50px auto;
+body{
+  background-color:white;
+  font-size:10pt;
+  font-family:sans-serif;
+  color:#00436e;
   }
-  
-  <STYLE type=text/css>A {
-	COLOR: blue; TEXT-DECORATION: none
-}
-A:active {
-	COLOR: blue; TEXT-DECORATION: none
-}
-A:visited {
-	COLOR: blue; TEXT-DECORATION: none
-}
-A:hover {
-	COLOR: red; TEXT-DECORATION: none
-}
-</STYLE>
-	<!--
-    	This script downloaded from www.JavaScriptBank.com
-    	Come to view and download over 2000+ free javascript at www.JavaScriptBank.com
-	-->
